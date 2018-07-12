@@ -20,12 +20,26 @@ void setData(np::ndarray& array2d, int x, int y, double v)
     *reinterpret_cast<int *>(array2d.get_data() + y * strides[0] + x * strides[1]) = v;
 }
 
-int getAround(np::ndarray frame, int x, int y)
+
+int loopCheck(int v, int max_)
+{
+    while (v < 0) {
+        v += max_;
+    }
+    while (v >= max_) {
+        v -= max_;
+    }
+    return v;
+}
+
+
+
+int getAround(np::ndarray frame, int x, int y, int xMax, int yMax)
 {
     int count = - int(getData(frame, x, y));
-    for (int j = -1; j <= 1; j++)
-        for (int i = -1; i <= 1; i++) 
-            count += int(getData(frame, x + i, y + j));
+    for (int j = y - 1; j <= y + 1; j++)
+        for (int i = x - 1; i <= x + 1; i++)
+            count += int(getData(frame, loopCheck(i, xMax), loopCheck(j, yMax)));
     return count;
 }
 
@@ -47,9 +61,9 @@ void lifegameUpdate(np::ndarray frame, np::ndarray nextFrame, float mutateRatio)
 
     int count;
     int current;
-    for (size_t j = 1; j < y - 1; j++) {
-        for (size_t i = 1; i < x - 1; i++) {
-            count = getAround(frame, i, j);
+    for (size_t j = 0; j < y; j++) {
+        for (size_t i = 0; i < x; i++) {
+            count = getAround(frame, i, j, x, y);
             current = getData(frame, i, j);
      
             if (current == 0 && count == 3) { 
