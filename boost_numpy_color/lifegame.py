@@ -11,8 +11,8 @@ from six.moves import range
 
 import build.liblifegame as lifegame
 
-CELL_SIZE = 100
-DISPLAY_CELL_RATIO = 2
+CELL_SIZE = 300
+DISPLAY_CELL_RATIO = 1
 MUTATE_RATIO = 0.001
 
 
@@ -35,8 +35,7 @@ def main(argv) :
     while True :
         ### Update
         for c in range(3) :
-            nc = c + 1 if c + 1 < 3 else 0
-            update(frame[:, :, c], next_frame[:, :, nc])
+            update(frame[:, :, c], next_frame[:, :, c])
 
         ### Display
         display_frame = next_frame * 255

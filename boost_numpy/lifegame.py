@@ -11,8 +11,8 @@ from six.moves import range
 
 import build.liblifegame as lifegame
 
-CELL_SIZE = 100
-DISPLAY_CELL_RATIO = 2
+CELL_SIZE = 300
+DISPLAY_CELL_RATIO = 1
 MUTATE_RATIO = 0.001
 
 

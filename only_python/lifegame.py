@@ -9,8 +9,8 @@ import numpy as np
 from itertools import product
 from six.moves import range
 
-CELL_SIZE = 100
-DISPLAY_CELL_RATIO = 2
+CELL_SIZE = 300
+DISPLAY_CELL_RATIO = 1
 MUTATE_RATIO = 0.001
 
 
